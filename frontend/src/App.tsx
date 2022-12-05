@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const [flaskData, setFlaskData] = useState("");
+
+  useEffect(() => {
+    setFlaskData("It works!")
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +25,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>{flaskData}</p>
       </header>
     </div>
   );
