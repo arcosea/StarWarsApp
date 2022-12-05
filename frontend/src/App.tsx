@@ -7,7 +7,11 @@ function App() {
   const [flaskData, setFlaskData] = useState("");
 
   useEffect(() => {
-    setFlaskData("It works!")
+    fetch("http://127.0.0.1:5000/").then((response) => {
+        return response.json()
+    }).then((data) => {
+      setFlaskData(data.value)
+    })
   }, [])
 
   return (
