@@ -12,3 +12,13 @@ copy character(name, height, mass, hair_color, skin_color, eye_color, birth_year
 from '/docker-entrypoint-initdb.d/seed_data/characters.csv'
 delimiter ','
 csv header;
+
+copy vehicle(name,model,manufacturer,cost_in_credits,length,max_atmosphering_speed,crew,passengers,cargo_capacity,consumables,vehicle_class)
+from '/docker-entrypoint-initdb.d/seed_data/vehicles.csv'
+delimiter ','
+csv header;
+
+copy starship(name,model,manufacturer,cost_in_credits,length,max_atmosphering_speed,crew,passengers,cargo_capacity,consumables,hyperdrive_rating,MGLT,starship_class)
+from '/docker-entrypoint-initdb.d/seed_data/starships.csv'
+delimiter ','
+csv header;
