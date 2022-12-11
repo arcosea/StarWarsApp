@@ -12,7 +12,7 @@ function App() {
     }).then((data) => {
       setFlaskData(data.value)
     })
-  }, [])
+  }, []) 
 
   return (
     <div className="App">
