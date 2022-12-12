@@ -12,3 +12,17 @@ CORS(app)
 @app.route('/')
 def hello_world():
     return {"value": 5}
+
+
+@app.route('/image-generator')
+def request_from_react():
+    #take the user information to then make another request
+    #first we get data from db
+    #then we request dalle image through helpere dalle_request function
+    return {"val": 22}
+
+
+def dalle_request():
+    #make request to dalle
+    #return image
+    return
