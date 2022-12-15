@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import * as THREE from 'three'
+import { Vector3 } from 'three';
 
 function App() {
 
+  // Moving through space background
   useEffect(() => {
 
     let scene: THREE.Scene;
     let camera: THREE.PerspectiveCamera;
     let renderer: THREE.WebGLRenderer;
     let starGeo: THREE.BufferGeometry;
-    let stars: THREE.Points;
+    let space: THREE.Points;
 
     function init() {
       // Create scene object
@@ -29,9 +31,10 @@ function App() {
       // Create geoemtry for stars & vertices for
       starGeo = new THREE.BufferGeometry();
       let starPoints = []
+      let numStars = 50000;
 
       // Create random vertices for stars
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < numStars; i++) {
         let x = Math.random() * 600 - 300
         let y = Math.random() * 600 - 300
         let z = Math.random() * 600 - 300
@@ -41,9 +44,6 @@ function App() {
       }
       starGeo.setFromPoints(starPoints);
 
-
-      //starGeo.setAttribute('vertices', new THREE.BufferAttribute([], 180000));
-
       // Create Texture for vertices
       let sprite = new THREE.TextureLoader().load('star.png');
       let starMaterial = new THREE.PointsMaterial({
@@ -52,14 +52,16 @@ function App() {
         map: sprite
       });
 
-      stars = new THREE.Points(starGeo, starMaterial);
-      scene.add(stars);
+      // Add stars to scene
+      space = new THREE.Points(starGeo, starMaterial);
+      scene.add(space);
 
       animate();
     }
-    //rendering loop
+    // Rendering loop
     function animate() {
-      camera.translateZ(-1);
+      space.translateY(0.01);
+      space.rotateX(0.005);
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     }
@@ -70,7 +72,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{backgroundColor: "white"}}>Hello</h1>
+      <h1 style={{ backgroundColor: "white" }}>Hello</h1>
     </div>
   );
 }
