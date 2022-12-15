@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -20,14 +20,14 @@ function App() {
       return;
     }
 
-    console.log(data)
-    fetch(`http://127.0.0.1:5000/image-generator?name=${data[0].name}`).then((response) => {
-      return response.json()
-    }).then((imageUrl) => {
-      setImageLink(imageUrl)
-    })
+    // fetch(`http://127.0.0.1:5000/image-generator?name=${data[0].name}`).then((response) => {
+    //   return response.json()
+    // }).then((imageUrl) => {
+    //   setImageLink(imageUrl.image_url)
+    // })
+    return
   }, [data]);
-  
+
   //handleSubmit
   const handleSubmit = (e:any) => {
     e.preventDefault()
@@ -36,7 +36,9 @@ function App() {
     }).then((data) => {
         setData(data)
     })
+    
   }
+  
 
   const handleNameChange = (e:any) => {
     const { value } = e.target
@@ -45,22 +47,11 @@ function App() {
 
   const handleTypeChange = (e:any) => {
     const { value } = e.target
-    console.log(value)
     setType(value)
   }
 
   return (
     <div className="App">
-
-      {/*
-      TODO:
-      create a form
-      one dropdown for type
-      an input, prepulated based on the type
-      when user clicks submit, make request to flask
-
-      recieve the request and display image
-      */}
       <form>
         <label htmlFor="type">
           Type:
@@ -79,6 +70,28 @@ function App() {
         <button onClick={handleSubmit}>Search</button>
       </form>
       <img alt="sunset" src={imageLink}/>
+      <table>
+        <thead>
+          <th>
+            {
+              Object.keys(data[0]).map(key => {
+                return <td>{key}</td>
+              })
+            }
+          </th>
+        </thead>
+        <tbody>
+          
+            {/* {
+              data.map(element => {
+                return <tr>{Object.keys(element).map(val => {
+                  return <td>{element[val]}</td>
+                })}</tr>
+              })
+            } */}
+
+        </tbody>
+      </table>
     </div>
   );
 }
