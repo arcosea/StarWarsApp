@@ -3,20 +3,21 @@ import './App.css';
 
 function App() {
 
+  //types that are possible
   const typeList:string[] = ["Character", "Planet", "Species", "Starship", "Vehicle"]
 
-  const [type, setType] = useState("")
-
+  //state to track type and name
+  const [type, setType] = useState("character")
   const [name, setName] = useState("")
 
-  const onSubmit = (e:any) => {
+  //handleSubmit
+  const handleSubmit = (e:any) => {
     e.preventDefault()
     
-    fetch("http://127.0.0.1:5000/image-generator", {body: JSON.stringify(
-      {type: type, name: name})}).then((response) => {
+    fetch(`http://127.0.0.1:5000/image-generator?type=${type}&name=${name}`).then((response) => {
         return response.json()
     }).then((data) => {
-        
+        console.log(data)
     })
     
   }
@@ -28,6 +29,7 @@ function App() {
 
   const handleTypeChange = (e:any) => {
     const { value } = e.target
+    console.log(value)
     setType(value)
   }
 
@@ -49,7 +51,7 @@ function App() {
           <select id="type" onChange={handleTypeChange}>
             {
               typeList.map((type, i) => {
-                return <option key={i} value={type}>{type}</option>
+                return <option key={i} value={type.toLowerCase()}>{type}</option>
               })
             }
           </select> 
@@ -58,7 +60,7 @@ function App() {
           Name:
           <input id="name" onChange={handleNameChange} value={name}></input>
         </label>
-        <button onClick={onSubmit}>Search</button>
+        <button onClick={handleSubmit}>Search</button>
       </form>
       <img alt="sunset" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/sunset-quotes-21-1586531574.jpg"/>
     </div>
