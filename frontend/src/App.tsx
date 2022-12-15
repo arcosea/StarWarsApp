@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import './App.css';
 
 function App() {
@@ -10,16 +10,32 @@ function App() {
   const [type, setType] = useState("character")
   const [name, setName] = useState("")
 
+  const [data, setData] = useState([{name: 'Anakin Skywalker'}])
+  const [imageLink, setImageLink] = useState("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/sunset-quotes-21-1586531574.jpg")
+
+  const firstUpdate = useRef(0);
+  useEffect(() => {
+    if (firstUpdate.current < 2) {
+      firstUpdate.current++
+      return;
+    }
+
+    console.log(data)
+    fetch(`http://127.0.0.1:5000/image-generator?name=${data[0].name}`).then((response) => {
+      return response.json()
+    }).then((imageUrl) => {
+      setImageLink(imageUrl)
+    })
+  }, [data]);
+  
   //handleSubmit
   const handleSubmit = (e:any) => {
     e.preventDefault()
-    
-    fetch(`http://127.0.0.1:5000/image-generator?type=${type}&name=${name}`).then((response) => {
+    fetch(`http://127.0.0.1:5000/star-wars-data?type=${type}&name=${name}`).then((response) => {
         return response.json()
     }).then((data) => {
-        console.log(data)
+        setData(data)
     })
-    
   }
 
   const handleNameChange = (e:any) => {
@@ -62,7 +78,7 @@ function App() {
         </label>
         <button onClick={handleSubmit}>Search</button>
       </form>
-      <img alt="sunset" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/sunset-quotes-21-1586531574.jpg"/>
+      <img alt="sunset" src={imageLink}/>
     </div>
   );
 }

@@ -15,7 +15,7 @@ def hello_world():
     return {"value": 5}
 
 
-@app.route('/image-generator')
+@app.route('/star-wars-data')
 def request_from_react():
 
     with conn.cursor() as cursor:
@@ -33,14 +33,14 @@ def request_from_react():
 
         return list(cursor)
 
-
-    #take the user information to then make another request
-    #first we get data from db
     #then we request dalle image through helpere dalle_request function
-    return {"val": 22}
 
-
+@app.route('/image-generator')
 def dalle_request():
+
+    name = request.args.get("name", "Anakin Skywalker")
+
+
     #make request to dalle
     #return image
-    return
+    return {"value": 5}
