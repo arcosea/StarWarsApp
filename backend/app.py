@@ -1,4 +1,6 @@
 import psycopg2
+import os
+import openai
 from flask import Flask, request
 from psycopg2.extensions import AsIs
 from psycopg2.extras import RealDictCursor
@@ -38,7 +40,14 @@ def request_from_react():
 @app.route('/image-generator')
 def dalle_request():
 
-    name = request.args.get("name", "Anakin Skywalker")
+    openai.api_key = ""
+    response = openai.Image.create(
+        prompt="a white siamese cat",
+        n=1,
+        size="1024x1024"
+    )
+    return response.data[0].url
+    #name = request.args.get("name", "Anakin Skywalker")
 
 
     #make request to dalle
