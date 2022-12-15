@@ -6,59 +6,64 @@ function App() {
 
   useEffect(() => {
 
-    let scene:THREE.Scene;
-    let camera:THREE.PerspectiveCamera;
-    let renderer:THREE.WebGLRenderer;
-    let starGeo:THREE.BufferGeometry;
-    let stars;
+    let scene: THREE.Scene;
+    let camera: THREE.PerspectiveCamera;
+    let renderer: THREE.WebGLRenderer;
+    let starGeo: THREE.BufferGeometry;
+    let stars: THREE.Points;
 
     function init() {
-      //create scene object
+      // Create scene object
       scene = new THREE.Scene();
-      
-      //setup camera with facing upward
-      camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight, 1, 1000);
-      camera.position.z = 1;
-      camera.rotation.x = Math.PI/2;
-      
-      //setup renderer
+
+      // Setup camera with facing upward
+      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+      camera.position.z = 100;
+      camera.rotation.x = Math.PI / 2;
+
+      // Setup renderer
       renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
+      // Create geoemtry for stars & vertices for
       starGeo = new THREE.BufferGeometry();
+      let starPoints = []
 
-      let verticesArray = []
+      // Create random vertices for stars
+      for (let i = 0; i < 10000; i++) {
+        let x = Math.random() * 600 - 300
+        let y = Math.random() * 600 - 300
+        let z = Math.random() * 600 - 300
+        let star = new THREE.Vector3(x, y, z);
+        starPoints.push(star);
 
-      for(let i=0;i<18000;i++) {
-
-        let star = Math.random() * 600 - 300
-        verticesArray.push(star)
-        
       }
+      starGeo.setFromPoints(starPoints);
 
-      let vertices = Float32Array.from(verticesArray);
 
-      starGeo.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3));
+      //starGeo.setAttribute('vertices', new THREE.BufferAttribute([], 180000));
 
-      let sprite = new THREE.TextureLoader().load( 'star.png' );
+      // Create Texture for vertices
+      let sprite = new THREE.TextureLoader().load('star.png');
       let starMaterial = new THREE.PointsMaterial({
         color: 0xaaaaaa,
         size: 0.7,
         map: sprite
       });
 
-      stars = new THREE.Points(starGeo,starMaterial);
+      stars = new THREE.Points(starGeo, starMaterial);
       scene.add(stars);
 
-      animate(); 
+      animate();
     }
     //rendering loop
     function animate() {
+      camera.translateZ(-1);
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     }
-    
+
     init();
 
   }, [])
