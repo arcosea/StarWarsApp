@@ -54,7 +54,9 @@ canvas {
   margin-left: 10px;
 }
 
-
+.form-container button:hover {
+  cursor: pointer;
+}
 
 .form-container form {
   display: flex;
