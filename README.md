@@ -43,7 +43,7 @@ Used 3js to create space warping in the background
 ## 4) Create .env file in Backend
 ```
 cd backend
-touch env
+touch .env
 ```
 
 ## 4) Add OpenAI API Key Inside .env File in the form OPENAI_API_KEY=
