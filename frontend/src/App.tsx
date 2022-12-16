@@ -20,11 +20,11 @@ function App() {
       return;
     }
 
-    // fetch(`http://127.0.0.1:5000/image-generator?name=${data[0].name}`).then((response) => {
-    //   return response.json()
-    // }).then((imageUrl) => {
-    //   setImageLink(imageUrl.image_url)
-    // })
+    fetch(`http://127.0.0.1:5000/image-generator?name=${data[0].name}`).then((response) => {
+      return response.json()
+    }).then((imageUrl) => {
+      setImageLink(imageUrl.image_url)
+    })
     return
   }, [data]);
 
