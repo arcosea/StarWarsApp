@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import * as THREE from 'three'
+import BB8 from './components/BB8/BB8'
 
 
 function App() {
@@ -25,10 +26,12 @@ function App() {
       // Setup renderer
       renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
+
       window.addEventListener("resize", (event) => {
         renderer.setSize(window.innerWidth, window.innerHeight);
       })
-      document.getElementById("root")?.appendChild(renderer.domElement)
+      document.querySelector("body")?.appendChild(renderer.domElement)
+      
 
       // Create geoemtry for stars & vertices for
       starGeo = new THREE.BufferGeometry();
@@ -79,7 +82,9 @@ function App() {
   const [type, setType] = useState("character")
   const [name, setName] = useState("")
   const [data, setData] = useState([{ name: 'Anakin Skywalker' }])
-  const [imageLink, setImageLink] = useState("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/sunset-quotes-21-1586531574.jpg")
+  const [imageLink, setImageLink] = useState("https://wallpaperaccess.com/full/2753723.jpg")
+
+  const [imageIsLoading, setImageIsLoading] = useState(false)
 
   // Request for image
   const firstUpdate = useRef(0);
@@ -89,10 +94,14 @@ function App() {
       return;
     }
 
+    //image is loading
+    setImageIsLoading(true)
+
     fetch(`http://127.0.0.1:5000/image-generator?name=${data[0].name}`).then((response) => {
       return response.json()
     }).then((imageUrl) => {
       setImageLink(imageUrl.image_url)
+      setImageIsLoading(false)
     })
     return
   }, [data]);
@@ -108,7 +117,6 @@ function App() {
 
   }
 
-
   const handleNameChange = (e: any) => {
     const { value } = e.target
     setName(value)
@@ -119,59 +127,66 @@ function App() {
     setType(value)
   }
 
-
-
   return (
     <div className="App">
-      {/* 
-        Form for request to database & openAI
-      */}
-      <form>
-        <label className="user-type" htmlFor="type">
-          Type:
-          <select id="type" onChange={handleTypeChange}>
-            {
-              typeList.map((type, i) => {
-                return <option key={i} value={type.toLowerCase()}>{type}</option>
-              })
-            }
-          </select>
-        </label>
-        <label className="user-type" htmlFor="name">
-          Name:
-          <input id="name" onChange={handleNameChange} value={name}></input>
-        </label>
-        <button onClick={handleSubmit}>Search</button>
-      </form>
-      <img alt="sunset" src={imageLink} />
+      <header className="header">
+        <h1>Star Wars Image App</h1>
+      </header>
+      <div className="form-container">
+        <form>
+          <label className="user-type" htmlFor="type">
+            Type:
+            <select id="type" onChange={handleTypeChange}>
+              {
+                typeList.map((type, i) => {
+                  return <option key={i} value={type.toLowerCase()}>{type}</option>
+                })
+              }
+            </select>
+          </label>
+          <label className="user-type" htmlFor="name">
+            Name:
+            <input id="name" onChange={handleNameChange} value={name}></input>
+          </label>
+          <button onClick={handleSubmit}>Search</button>
+        </form>
+      </div>
+      <div className="image-container">
 
-      {/* 
-        Results from database
-      */}
-      <table className="results">
-        <thead>
-          <tr>
+        {
+          imageIsLoading ? <BB8 /> : <img alt="sunset" src={imageLink} />
+        }
+
+      </div>
+      <div className="table-container">
+        <table className="results">
+          <thead>
+            <tr>
+              {
+                Object.keys(data[0]).map((headerName, i) => {
+                  return <th key={i}>{headerName}</th>
+                })
+              }
+            </tr>
+          </thead>
+          <tbody>
             {
-              Object.keys(data[0]).map((headerName, i) => {
-                return <th key={i}>{headerName}</th>
+              data.map((element, i) => {
+                return <tr key={i}>
+                  {
+                    Object.values(element).map((val, i) => {
+                      return <td key={i}>{val}</td>
+                    })
+                  }
+                </tr>
               })
             }
-          </tr>
-        </thead>
-        <tbody>
-          {
-            data.map((element, i) => {
-              return <tr key={i}>
-                {
-                  Object.values(element).map((val, i) => {
-                    return <td key={i}>{val}</td>
-                  })
-                }
-              </tr>
-            })
-          }
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+      <footer className="footer">
+        <h2>Powered By DMAC Destroyers © 2022</h2>
+      </footer>
     </div >
   );
 }
