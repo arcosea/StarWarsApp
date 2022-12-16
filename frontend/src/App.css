@@ -11,10 +11,12 @@ img {
   width: 100%;
   height: 100%;
   position: relative;
-  margin: 30px;
   z-index: 9;
   text-align: center;
   font-family: 'Pathway Gothic One';
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 canvas {
@@ -36,11 +38,50 @@ canvas {
 
 .image-container {
   margin: 0 auto;
-  width: 510px;
+  width: 100%;
   height: 510px;
 }
 
 .table-container {
   display: flex;
   justify-content: center;
+}
+
+.table-container .results, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.table-container .results {
+  width: 80%;
+}
+
+.table-container .results tr th{
+  font-weight: 200px;
+  font-size: 18px;
+  border: 1px solid white;
+  font-family: 'Courier New', monospace;
+  color: #FFE81F;
+}
+
+
+
+.header h1 {
+  color: #FFE81F;
+  font-family: 'Courier New', monospace;
+}
+
+.footer {
+  border-top: 1px solid white;
+  display: flex;
+  justify-content: left;
+  height: 75px;
+  margin-top: auto;
+}
+
+.footer h2 {
+  color: #FFE81F;
+  font-family: 'Courier New', monospace;
+  margin-left: 15px;
 }

@@ -25,13 +25,12 @@ function App() {
 
       // Setup renderer
       renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(window.innerWidth, 1500);
 
       window.addEventListener("resize", (event) => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, 1500);
       })
       document.querySelector("body")?.appendChild(renderer.domElement)
-      
 
       // Create geoemtry for stars & vertices for
       starGeo = new THREE.BufferGeometry();
@@ -66,7 +65,7 @@ function App() {
     // Rendering loop
     function animate() {
       //space.translateY(0.01);
-      space.rotateX(0.005);
+      space.rotateX(0.0025);
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     }
@@ -89,6 +88,7 @@ function App() {
   // Request for image
   const firstUpdate = useRef(0);
   useEffect(() => {
+
     if (firstUpdate.current < 2) {
       firstUpdate.current++
       return;
