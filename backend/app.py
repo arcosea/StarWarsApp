@@ -19,8 +19,6 @@ app = Flask(__name__)
 CORS(app)
 
 # Default Test Route
-
-
 @app.route('/')
 def hello_world():
     return {"value": 5}
@@ -102,7 +100,6 @@ def request_from_react():
 
         # Return list
         return temp
-
 
 @app.route('/image-generator')
 def dalle_request():
