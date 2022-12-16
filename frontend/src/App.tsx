@@ -73,14 +73,13 @@ function App() {
     init();
   }, []);
 
-
   // Types that are possible
   const typeList: string[] = ["Character", "Planet", "Species", "Starship", "Vehicle"]
 
   // State to track type and name
   const [type, setType] = useState("character")
   const [name, setName] = useState("")
-  const [data, setData] = useState([{ name: 'Anakin Skywalker' }])
+  const [data, setData] = useState([{name: "Anakin Skywalker", homeworld: "Tatooine", species: "human"}])
   const [imageLink, setImageLink] = useState("https://wallpaperaccess.com/full/2753723.jpg")
 
   const [imageIsLoading, setImageIsLoading] = useState(false)
@@ -97,7 +96,18 @@ function App() {
     //image is loading
     setImageIsLoading(true)
 
-    fetch(`http://127.0.0.1:5000/image-generator?name=${data[0].name}`).then((response) => {
+    let temp = ""
+
+    if(type === "planet"){
+      temp = data[0].homeworld
+    } else if(type === "species"){
+      temp = data[0].species
+    } else {
+      //characters, vehicles, starships default
+      temp = data[0].name
+    }
+
+    fetch(`http://127.0.0.1:5000/image-generator?name=${temp}&type=${type}`).then((response) => {
       return response.json()
     }).then((imageUrl) => {
       setImageLink(imageUrl.image_url)
@@ -134,8 +144,10 @@ function App() {
       </header>
       <div className="form-container">
         <form>
-          <label className="user-type" htmlFor="type">
-            Type:
+          <div>
+            <label className="user-type" htmlFor="type">
+              Type:
+            </label>
             <select id="type" onChange={handleTypeChange}>
               {
                 typeList.map((type, i) => {
@@ -143,20 +155,20 @@ function App() {
                 })
               }
             </select>
-          </label>
-          <label className="user-type" htmlFor="name">
-            Name:
+          </div>
+          <div>
+            <label className="user-type" htmlFor="name">
+              Name:
+            </label>
             <input id="name" onChange={handleNameChange} value={name}></input>
-          </label>
-          <button onClick={handleSubmit}>Search</button>
+            <button onClick={handleSubmit} disabled={imageIsLoading}>Search</button>
+          </div>
         </form>
       </div>
       <div className="image-container">
-
         {
           imageIsLoading ? <BB8 /> : <img alt="sunset" src={imageLink} />
         }
-
       </div>
       <div className="table-container">
         <table className="results">
