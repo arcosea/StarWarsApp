@@ -54,7 +54,7 @@ def request_from_react():
         # If input type is character, planets or species
         if star_wars_type in RELATED_TYPES:
             cursor.execute("""
-                select c.name as "character name", c.height, c.mass, c.gender, c.hair_color as "hair color", 
+                select c.name as "name", c.height, c.mass, c.gender, c.hair_color as "hair color", 
                 s.name as species, s.classification, s.average_height as "avg height", 
                 s.average_lifespan as "avg lifespan", p.name as homeworld, p.terrain as "planet terrain"
                 from character c
@@ -103,6 +103,7 @@ def dalle_request():
         Makes a request to OpenAI to generate an image based on query parameter.
         Returns an image url  
     """
+
     # Get Name from query
     name = request.args.get("name", default="Star Wars")
     name = name + "from Star Wars"
