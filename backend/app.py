@@ -69,7 +69,6 @@ def dalle_request():
 
     name = name + " from Star Wars"
 
-    print(API_KEY)
     openai.api_key = API_KEY
     response = openai.Image.create(
     prompt=name,

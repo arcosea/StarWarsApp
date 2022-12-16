@@ -72,24 +72,27 @@ function App() {
       <img alt="sunset" src={imageLink}/>
       <table>
         <thead>
-          <th>
+          <tr>
             {
-              Object.keys(data[0]).map(key => {
-                return <td>{key}</td>
+              Object.keys(data[0]).map((headerName, i) => {
+                return <th key={i}>{headerName}</th>
               })
             }
-          </th>
+          </tr>
         </thead>
         <tbody>
-          
-            {/* {
-              data.map(element => {
-                return <tr>{Object.keys(element).map(val => {
-                  return <td>{element[val]}</td>
-                })}</tr>
-              })
-            } */}
-
+            
+            {
+            data.map((element, i) => {
+              return <tr key={i}>
+                {
+                  Object.values(element).map((val, i) => {
+                    return <td key={i}>{val}</td>
+                  })
+                }
+              </tr>
+            })
+            }
         </tbody>
       </table>
     </div>
