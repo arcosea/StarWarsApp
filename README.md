@@ -26,7 +26,11 @@ Make search Button disabled and include BB-8 loading screen while waiting for re
 
 Used 3js to create space warping in the background
 
+## Prerequiste
+Latest NodeJS installed
+
 # Instructions: 
+
 
 ## 1) Clone repository
 
