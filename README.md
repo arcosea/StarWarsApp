@@ -30,7 +30,7 @@ Used 3js to create space warping in the background
 
 # Instructions: 
 ## Prerequiste
-Visual Studio Code, NodeJS, Docker, Docker extensions
+Visual Studio Code, NodeJS, Docker, Docker & Dev Container VS Code extensions
 
 ## 1) Clone repository
 ```
