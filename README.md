@@ -26,16 +26,17 @@ Make search Button disabled and include BB-8 loading screen while waiting for re
 
 Used 3js to create space warping in the background
 
-## Prerequiste
-Latest NodeJS installed
+
 
 # Instructions: 
-
+## Prerequiste
+NodeJS, Docker
 
 ## 1) Clone repository
 
-## 2) From root Directory Install All Dependencies, Run Following
+## 2) In Root Directory Install All Dependencies into Frontend, Run Following
 ```
+   cd frontend
    npm install
    npm install three
    npm i --save-dev @types/three
