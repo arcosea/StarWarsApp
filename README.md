@@ -32,14 +32,6 @@ Used 3js to create space warping in the background
 ## Prerequiste
 Visual Studio Code, NodeJS, Docker, Docker & Dev Container VS Code extensions
 
-## 0) Docker Container Note
-May have to cd into dev container and run docker compose up 
-```
-cd .devcontainer
-docker compose up
-```
-and then delete .postgres_data inside .devcontainer in order to be able to build container
-
 ## 1) Clone repository
 ```
 git clone {url}
@@ -67,6 +59,12 @@ touch .env
 OPENAI_API_KEY={Enter Key Here}
 `
 ## 5) Build & Open Docker Container
+May have to cd into dev container and run docker compose up 
+```
+cd .devcontainer
+docker compose up
+```
+and then delete .postgres_data inside .devcontainer in order to be able to build container
 
 ## 6) From Root Directory Run Flask API in Backend
 ```
