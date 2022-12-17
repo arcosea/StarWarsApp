@@ -56,7 +56,10 @@ OPENAI_API_KEY={Enter Key Here}
 ```
 cd backend
 flask --debug run
-cd ..
+```
+
+## 7) From Root Directory Run React Web App
+```
 cd frontend
 npm start
 ```
