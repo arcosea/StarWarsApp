@@ -52,7 +52,7 @@ OPENAI_API_KEY={Enter Key Here}
 `
 ## 5) Build & Open Docker Container
 
-## 6) From Root Directory Run Flask API in Backend & Then React Web App
+## 6) From Root Directory Run Flask API in Backend
 ```
 cd backend
 flask --debug run
