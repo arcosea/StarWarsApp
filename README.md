@@ -33,6 +33,9 @@ Used 3js to create space warping in the background
 NodeJS, Docker
 
 ## 1) Clone repository
+```
+git clone {url}
+```
 
 ## 2) In Root Directory Install All Dependencies into Frontend, Run Following
 ```
