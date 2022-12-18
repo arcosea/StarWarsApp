@@ -79,10 +79,12 @@ npm start
 ```
 
 # Technologies & Tools
-React
-Typescript
-HTML/CSS
-OpenAI API
-3JS
-Docker
+React,
+Typescript,
+Python,
+HTML/CSS,
+OpenAI API,
+3JS,
+Docker,
 PostgreSQL
+
