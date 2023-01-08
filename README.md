@@ -82,6 +82,7 @@ npm start
 React,
 Typescript,
 Python,
+Flask,
 HTML/CSS,
 OpenAI API,
 3JS,
